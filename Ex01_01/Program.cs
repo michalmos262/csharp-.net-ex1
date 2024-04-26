@@ -30,7 +30,6 @@ namespace Ex01_01
             string userInput;
             
             Console.WriteLine($"Please enter {k_NumOfInputNumbers} binary numbers of {k_BinarySeriesLength} digits each:");
-
             while (validInputsCount < k_NumOfInputNumbers)
             {
                 userInput = Console.ReadLine();
@@ -49,17 +48,17 @@ namespace Ex01_01
             return binaryNumbers;
         }
 
-        private static bool isStringPositiveBinaryNumber(string i_String)
+        private static bool isStringPositiveBinaryNumber(string i_UserInput)
         {
             bool isBinaryNum = true, isPositiveNum = false;
 
-            for (int i = 0; i < i_String.Length && isBinaryNum; i++)
+            for (int i = 0; i < i_UserInput.Length && isBinaryNum; i++)
             {
-                if (i_String[i] != '0' && i_String[i] != '1')
+                if (i_UserInput[i] != '0' && i_UserInput[i] != '1')
                 {
                     isBinaryNum = false;
                 }
-                else if(i_String[i] == '1')
+                else if(i_UserInput[i] == '1')
                 {
                     isPositiveNum = true;
                 }
@@ -74,13 +73,13 @@ namespace Ex01_01
 
             for (int i = 0; i < i_BinaryStringsArray.Length; i++)
             {
-                decimalValues[i] = BinaryStringToDecimal(i_BinaryStringsArray[i]);
+                decimalValues[i] = binaryStringToDecimal(i_BinaryStringsArray[i]);
             }
 
             return decimalValues;
         }
 
-        private static uint BinaryStringToDecimal(string i_BinaryString)
+        private static uint binaryStringToDecimal(string i_BinaryString)
         {
             uint decimalValue = 0;
             int power = 0;
@@ -109,21 +108,21 @@ namespace Ex01_01
 
                 Console.Write(i_Array[i]);
             }
+
             Console.WriteLine();
         }
 
         private static void printStatisticsOfNumbers(uint[] i_Array, string [] i_BinaryStringsArray)
         {
-            uint[] zerosInBinaryStringCounters, onesInBinaryStringCounters;
+            uint[] zerosInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
+            uint[] onesInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
             uint powerOfTwoNumbersCounter, ascendingSeriesNumberCounter = 0;
             float averageNumOfZeros, averageNumOfOnes;
             string statistics;
 
-            zerosInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
-            onesInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
-            CountZerosAndOnesInBinaryNumsArray(i_BinaryStringsArray, zerosInBinaryStringCounters, onesInBinaryStringCounters);
-            averageNumOfZeros = (float)SumArray(zerosInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
-            averageNumOfOnes = (float)SumArray(onesInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
+            countZerosAndOnesInBinaryNumsArray(i_BinaryStringsArray, zerosInBinaryStringCounters, onesInBinaryStringCounters);
+            averageNumOfZeros = (float)sumArray(zerosInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
+            averageNumOfOnes = (float)sumArray(onesInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
             powerOfTwoNumbersCounter = countPowerOfTwoNumbers(onesInBinaryStringCounters);
             ascendingSeriesNumberCounter = countAscendingSeriesNumbers(i_Array);
             statistics = string.Format(
@@ -138,20 +137,20 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
             Console.WriteLine(statistics);
         }
 
-        private static void CountZerosAndOnesInBinaryNumsArray(string[] i_BinaryStringsArray, uint[] io_ZerosInBinaryStringCounters, uint[] io_OnesInBinaryStringCounters)
+        private static void countZerosAndOnesInBinaryNumsArray(string[] i_BinaryStringsArray, uint[] io_ZerosInBinaryStringCounters, uint[] io_OnesInBinaryStringCounters)
         {
             uint currentBinaryStringZerosCounter, currentBinaryStringOnesCounter;
 
             for (int i = 0; i < i_BinaryStringsArray.Length; i++)
             {
                 currentBinaryStringZerosCounter = currentBinaryStringOnesCounter = 0;
-                CountZerosAndOnesInBinarySeries(i_BinaryStringsArray[i], ref currentBinaryStringZerosCounter, ref currentBinaryStringOnesCounter);
+                countZerosAndOnesInBinarySeries(i_BinaryStringsArray[i], ref currentBinaryStringZerosCounter, ref currentBinaryStringOnesCounter);
                 io_ZerosInBinaryStringCounters[i] = currentBinaryStringZerosCounter;
                 io_OnesInBinaryStringCounters[i] = currentBinaryStringOnesCounter;
             }
         }
 
-        private static void CountZerosAndOnesInBinarySeries(string i_BinaryString, ref uint io_ZerosCounter, ref uint io_OnesCounter)
+        private static void countZerosAndOnesInBinarySeries(string i_BinaryString, ref uint io_ZerosCounter, ref uint io_OnesCounter)
         {
             foreach (char digit in i_BinaryString)
             {
@@ -159,14 +158,14 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
                 {
                     io_ZerosCounter++;
                 }
-                else // digit == '1'
+                else
                 {
                     io_OnesCounter++;
                 }
             }
         }
 
-        private static uint SumArray(uint[] i_Array)
+        private static uint sumArray(uint[] i_Array)
         {
             uint total = 0;
 
@@ -184,7 +183,7 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
 
             foreach(uint numOfOnes in i_OnesInBinaryStringCounters)
             {
-                // A number is a power of two if and only if there is a single 1 in it's binary form
+                // A positive number is a power of two if and only if there is a single 1 in it's binary form
                 if (numOfOnes == 1)
                 {
                     powerOfTwoNumbersCounter++;
