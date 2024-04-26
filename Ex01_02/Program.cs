@@ -20,41 +20,41 @@ namespace Ex01_02
                 i_DiamondHeight--;
             }
 
-            BuildDiamond(diamond, i_DiamondHeight);
+            buildDiamond(diamond, i_DiamondHeight);
             Console.WriteLine(diamond.ToString());
         }
 
-        static void BuildDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStarsToAppendToDiamond = 1)
+        private static void buildDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStarsToAppendToDiamond = 1)
         {
-            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
-            if (IsCurrentRowBaseOfDiamond(i_DiamondHeight, i_NumOfStarsToAppendToDiamond))
+            appendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
+            if (isCurrentRowBaseOfDiamond(i_DiamondHeight, i_NumOfStarsToAppendToDiamond))
             {
                 return;
             }
 
-            BuildDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond + 2);
-            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
+            buildDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond + 2);
+            appendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
         }
 
-        static bool IsCurrentRowBaseOfDiamond(int i_DiamondHeight, int i_NumOfStarsInCurrentRowOfDiamond)
+        private static bool isCurrentRowBaseOfDiamond(int i_DiamondHeight, int i_NumOfStarsInCurrentRowOfDiamond)
         {
             return i_NumOfStarsInCurrentRowOfDiamond == i_DiamondHeight;
         }
 
-        static void AppendLineToDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStars)
+        private static void appendLineToDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStars)
         {
             int numOfSpacesBeforeStars = (i_DiamondHeight - i_NumOfStars) / 2;
 
-            AppendSpacesToRowInDiamond(o_Diamond, numOfSpacesBeforeStars);
-            AppendStarsToRowInDiamond(o_Diamond, i_NumOfStars);
+            appendSpacesToRowInDiamond(o_Diamond, numOfSpacesBeforeStars);
+            appendStarsToRowInDiamond(o_Diamond, i_NumOfStars);
         }
 
-        static void AppendSpacesToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfSpaces)
+        private static void appendSpacesToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfSpaces)
         {
             io_Diamond.Append(new string(' ', i_NumberOfSpaces));
         }
 
-        static void AppendStarsToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfStars)
+        private static void appendStarsToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfStars)
         {
             io_Diamond.Append(new string('*', i_NumberOfStars));
             io_Diamond.AppendLine();
