@@ -6,11 +6,11 @@ namespace Ex01_03
     {
         public static void Main()
         {
-            int diamondHeight = GetDiamondHeightFromUser();
+            int diamondHeight = getDiamondHeightFromUser();
             Ex01_02.Program.DrawDiamond(diamondHeight);
         }
 
-        static int GetDiamondHeightFromUser()
+        private static int getDiamondHeightFromUser()
         {
             string userInput;
             bool isInputInteger;
@@ -20,10 +20,11 @@ namespace Ex01_03
             isInputInteger = int.TryParse(userInput, out int diamondHeight);
             while (!isInputInteger || diamondHeight <= 0)
             {
-                Console.WriteLine("Wrong input! Diamond height must be a positive whole number, please try again:");
+                Console.WriteLine("Diamond height must be a positive whole number, please try again.");
                 userInput = Console.ReadLine();
                 isInputInteger = int.TryParse(userInput, out diamondHeight);
             }
+
             return diamondHeight;
         }
     }
