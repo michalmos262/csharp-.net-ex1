@@ -14,6 +14,7 @@ namespace Ex01_02
         public static void DrawDiamond(int i_DiamondHeight)
         {
             StringBuilder diamond = new StringBuilder();
+
             if (i_DiamondHeight % 2 == 0)
             {
                 i_DiamondHeight--;
@@ -24,12 +25,11 @@ namespace Ex01_02
 
         static void BuildDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStarsToAppendToDiamond = 1)
         {
+            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
             if (IsCurrentRowBaseOfDiamond(i_DiamondHeight, i_NumOfStarsToAppendToDiamond))
             {
-                AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
                 return;
             }
-            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
             BuildDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond + 2);
             AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
         }
