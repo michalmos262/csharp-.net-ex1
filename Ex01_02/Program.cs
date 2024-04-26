@@ -6,6 +6,7 @@ namespace Ex01_02
     public class Program
     {
         private const int k_DiamondHeight = 9;
+
         public static void Main()
         {
             DrawDiamond(k_DiamondHeight);
