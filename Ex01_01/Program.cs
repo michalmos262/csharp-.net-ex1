@@ -26,19 +26,19 @@ namespace Ex01_01
         private static string[] getBinarySeriesFromUser()
         {
             string[] binaryNumbers = new string[k_NumOfInputNumbers];
-            int validCount = 0;
+            int validInputsCount = 0;
             string userInput;
             
             Console.WriteLine($"Please enter {k_NumOfInputNumbers} binary numbers of {k_BinarySeriesLength} digits each:");
 
-            while (validCount < k_NumOfInputNumbers)
+            while (validInputsCount < k_NumOfInputNumbers)
             {
                 userInput = Console.ReadLine();
 
-                if (userInput.Length == k_BinarySeriesLength && isInputValid(userInput))
+                if (userInput.Length == k_BinarySeriesLength && isStringPositiveBinaryNumber(userInput))
                 {
-                    binaryNumbers[validCount] = userInput;
-                    validCount++;
+                    binaryNumbers[validInputsCount] = userInput;
+                    validInputsCount++;
                 }
                 else
                 {
@@ -49,17 +49,17 @@ namespace Ex01_01
             return binaryNumbers;
         }
 
-        private static bool isInputValid(string i_UserInput)
+        private static bool isStringPositiveBinaryNumber(string i_String)
         {
             bool isBinaryNum = true, isPositiveNum = false;
 
-            for (int i = 0; i < i_UserInput.Length && isBinaryNum; i++)
+            for (int i = 0; i < i_String.Length && isBinaryNum; i++)
             {
-                if (i_UserInput[i] != '0' && i_UserInput[i] != '1')
+                if (i_String[i] != '0' && i_String[i] != '1')
                 {
                     isBinaryNum = false;
                 }
-                else if(i_UserInput[i] == '1')
+                else if(i_String[i] == '1')
                 {
                     isPositiveNum = true;
                 }
@@ -91,6 +91,7 @@ namespace Ex01_01
                 {
                     decimalValue += (uint)Math.Pow(2, power);
                 }
+
                 power++; 
             }
 
@@ -105,18 +106,21 @@ namespace Ex01_01
                 {
                     Console.Write(" ");
                 }
+
                 Console.Write(i_Array[i]);
             }
-            Console.Write(Environment.NewLine);
+            Console.WriteLine();
         }
 
         private static void printStatisticsOfNumbers(uint[] i_Array, string [] i_BinaryStringsArray)
         {
-            uint[] zerosInBinaryStringCounters = new uint[i_BinaryStringsArray.Length], onesInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
+            uint[] zerosInBinaryStringCounters, onesInBinaryStringCounters;
             uint powerOfTwoNumbersCounter, ascendingSeriesNumberCounter = 0;
             float averageNumOfZeros, averageNumOfOnes;
             string statistics;
 
+            zerosInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
+            onesInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
             CountZerosAndOnesInBinaryNumsArray(i_BinaryStringsArray, zerosInBinaryStringCounters, onesInBinaryStringCounters);
             averageNumOfZeros = (float)SumArray(zerosInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
             averageNumOfOnes = (float)SumArray(onesInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
@@ -124,6 +128,8 @@ namespace Ex01_01
             ascendingSeriesNumberCounter = countAscendingSeriesNumbers(i_Array);
             statistics = string.Format(
                 @"
+----- Statistics of the binary numbers you typed -----
+
 The average number of zeros in the binary number is {0}.
 The average number of ones in the binary number is {1}.
 There are {2} numbers which are a power of 2.
@@ -153,7 +159,7 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
                 {
                     io_ZerosCounter++;
                 }
-                else if (digit == '1')
+                else // digit == '1'
                 {
                     io_OnesCounter++;
                 }
@@ -163,10 +169,12 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
         private static uint SumArray(uint[] i_Array)
         {
             uint total = 0;
+
             foreach (uint num in i_Array)
             {
                 total += num;
             }
+
             return total;
         }
 
@@ -176,8 +184,11 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
 
             foreach(uint numOfOnes in i_OnesInBinaryStringCounters)
             {
+                // A number is a power of two if and only if there is a single 1 in it's binary form
                 if (numOfOnes == 1)
+                {
                     powerOfTwoNumbersCounter++;
+                }
             }
 
             return powerOfTwoNumbersCounter;
@@ -214,6 +225,4 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
             return isDigitsAnAscendingSeries;
         }
     }
-
-
 }
