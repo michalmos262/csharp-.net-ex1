@@ -34,7 +34,7 @@ namespace Ex01_01
             {
                 userInput = Console.ReadLine();
 
-                if (userInput.Length == k_BinarySeriesLength && isStringPositiveBinaryNumber(userInput))
+                if (userInput.Length == k_BinarySeriesLength && isUserInputPositiveBinaryNumber(userInput))
                 {
                     binaryNumbers[validInputsCount] = userInput;
                     validInputsCount++;
@@ -48,7 +48,7 @@ namespace Ex01_01
             return binaryNumbers;
         }
 
-        private static bool isStringPositiveBinaryNumber(string i_UserInput)
+        private static bool isUserInputPositiveBinaryNumber(string i_UserInput)
         {
             bool isBinaryNum = true, isPositiveNum = false;
 
