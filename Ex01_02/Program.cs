@@ -14,30 +14,37 @@ namespace Ex01_02
         public static void DrawDiamond(int i_DiamondHeight)
         {
             StringBuilder diamond = new StringBuilder();
-            BuildDiamond(diamond, i_DiamondHeight);
-            Console.WriteLine(diamond.ToString());
-        }
-
-        static void BuildDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_CurrentRowIndexInDiamond = 1)
-        {
             if (i_DiamondHeight % 2 == 0)
             {
                 i_DiamondHeight--;
             }
-            if (i_CurrentRowIndexInDiamond == i_DiamondHeight / 2 + 1)
-            {
-                AppendStarsToRowInDiamond(o_Diamond, i_CurrentRowIndexInDiamond * 2 - 1);
-                return;
-            }
-            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_CurrentRowIndexInDiamond);
-            BuildDiamond(o_Diamond, i_DiamondHeight, i_CurrentRowIndexInDiamond + 1);
-            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_CurrentRowIndexInDiamond);
+            BuildDiamond(diamond, i_DiamondHeight);
+            Console.WriteLine(diamond.ToString());
         }
 
-        static void AppendLineToDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_CurrentRowIndexInDiamond)
+        static void BuildDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStarsToAppendToDiamond = 1)
         {
-            AppendSpacesToRowInDiamond(o_Diamond, i_DiamondHeight / 2 + 1 - i_CurrentRowIndexInDiamond);
-            AppendStarsToRowInDiamond(o_Diamond, i_CurrentRowIndexInDiamond * 2 - 1);
+            if (IsCurrentRowBaseOfDiamond(i_DiamondHeight, i_NumOfStarsToAppendToDiamond))
+            {
+                AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
+                return;
+            }
+            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
+            BuildDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond + 2);
+            AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
+        }
+
+        static bool IsCurrentRowBaseOfDiamond(int i_DiamondHeight, int i_NumOfStarsInCurrentRowOfDiamond)
+        {
+            return i_NumOfStarsInCurrentRowOfDiamond == i_DiamondHeight;
+        }
+
+        static void AppendLineToDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStars)
+        {
+            int numOfSpacesBeforeStars = (i_DiamondHeight - i_NumOfStars) / 2;
+
+            AppendSpacesToRowInDiamond(o_Diamond, numOfSpacesBeforeStars);
+            AppendStarsToRowInDiamond(o_Diamond, i_NumOfStars);
         }
 
         static void AppendSpacesToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfSpaces)
