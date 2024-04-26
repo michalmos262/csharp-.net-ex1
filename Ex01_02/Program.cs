@@ -19,6 +19,7 @@ namespace Ex01_02
             {
                 i_DiamondHeight--;
             }
+
             BuildDiamond(diamond, i_DiamondHeight);
             Console.WriteLine(diamond.ToString());
         }
@@ -30,6 +31,7 @@ namespace Ex01_02
             {
                 return;
             }
+
             BuildDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond + 2);
             AppendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
         }
