@@ -6,6 +6,7 @@ namespace Ex01_04
     class Program
     {
         private const uint k_InputStringLen = 10;
+        private const int k_Diviser = 4;
 
         public static void Main()
         {
@@ -13,95 +14,93 @@ namespace Ex01_04
         }
         public static void StringAnalysis()
         {
-            string englishStringOrNumber;
+            string englishStringOrNumber = getEnglishStringOrNumber();
 
-            englishStringOrNumber = getEnglishStringOrNumber();
             printStringStatistics(englishStringOrNumber);
         }
 
         private static void printStringStatistics(string i_EnglishStringOrNumber)
         {
-            string PalindromeAnalysis, divisibleBy4Analysis, numOfLowercaseLettersAnalysis,statistics;
+            string PalindromeAnalysis, divisibleBySpecificNumberAnalysis, numOfLowercaseLettersAnalysis,statistics;
 
             PalindromeAnalysis = getPalindromeAnalysis(i_EnglishStringOrNumber);
-            divisibleBy4Analysis = getDivisionBy4Analysis(i_EnglishStringOrNumber);
+            divisibleBySpecificNumberAnalysis = getDivisionBySpecificNumberAnalysis(i_EnglishStringOrNumber);
             numOfLowercaseLettersAnalysis = getEnglishStrAnalysis(i_EnglishStringOrNumber);
-
             statistics = string.Format(
                 @"
 ----- Statistics of the string you typed -----
+
 Palindrome analysis: {0}.
 Number analysis of the string: {1}.
 English analysis of the string: {2}.
 "
-, PalindromeAnalysis, divisibleBy4Analysis, numOfLowercaseLettersAnalysis);
-
+, PalindromeAnalysis, divisibleBySpecificNumberAnalysis, numOfLowercaseLettersAnalysis);
             Console.WriteLine(statistics);
         }
 
         private static string getEnglishStringOrNumber()
         {
-            string inputString, welcomeMessage = $"Please enter a string with {k_InputStringLen} characters consisting solely of either English alphabet letters or digits.";
+            string userInputStr, welcomeMessage = $"Please enter a string with {k_InputStringLen} characters consisting solely of either English alphabet letters or digits.";
 
             Console.WriteLine(welcomeMessage);
-            inputString = Console.ReadLine();
-            while (!isStringNumberOrInEnglish(inputString))
+            userInputStr = Console.ReadLine();
+            while (!isUserInputInCorrectLenAndANumberOrInEnglish(userInputStr))
             {
                 Console.Write("Invalid input ");
                 Console.WriteLine(welcomeMessage);
-                inputString = Console.ReadLine();
+                userInputStr = Console.ReadLine();
             }
 
-            return inputString;
+            return userInputStr;
         }
 
-        private static bool isStringNumberOrInEnglish(string i_String)
+        private static bool isUserInputInCorrectLenAndANumberOrInEnglish(string i_UserInput)
         {
-            bool isNumber, isStringInEnglish, isStringOnlyLowerCase, isStringOnlyUpperCase, isStringValid;
-
-            if (i_String.Length == k_InputStringLen) // If the length is valid
-            {
-                isNumber = isStringANumber(i_String);
-                isStringInEnglish = IsStringInEnglish(i_String);
-                isStringOnlyLowerCase = i_String == i_String.ToLower();
-                isStringOnlyUpperCase = i_String == i_String.ToUpper();
-                isStringValid = isNumber || (isStringInEnglish && (isStringOnlyLowerCase || isStringOnlyUpperCase));
-            }
-            else
-                isStringValid = false;
-
-            return isStringValid;
+            return (i_UserInput.Length == k_InputStringLen) && isInputNumberOrInEnglish(i_UserInput);
         }
 
-        private static bool isStringANumber(string i_String)
+        private static bool isInputNumberOrInEnglish(string i_UserInput)
+        {
+            bool isUserInputNumber, isUserInputInEnglish, isUserInputOnlyLowerCase, isUserInputOnlyUpperCase, isUserInputValid;
+
+            isUserInputNumber = isStringANumber(i_UserInput);
+            isUserInputInEnglish = isStringInEnglish(i_UserInput);
+            isUserInputOnlyLowerCase = i_UserInput == i_UserInput.ToLower();
+            isUserInputOnlyUpperCase = i_UserInput == i_UserInput.ToUpper();
+            isUserInputValid = isUserInputNumber || (isUserInputInEnglish && (isUserInputOnlyLowerCase || isUserInputOnlyUpperCase));
+         
+            return isUserInputValid;
+        }
+
+        private static bool isStringANumber(string i_InputStr)
         {
             int stringNumberValue;
-            return int.TryParse(i_String, out stringNumberValue);
+            return int.TryParse(i_InputStr, out stringNumberValue);
         }
-        private static bool IsStringInEnglish(string i_String)
+        private static bool isStringInEnglish(string i_InputStr)
         {
-            bool IsStringInEnglish = true;
+            bool isInputInEnglish = true;
             char currentChar;
 
-            for (int i = 0; i < i_String.Length && IsStringInEnglish; i++)
+            for (int i = 0; i < i_InputStr.Length && isInputInEnglish; i++)
             {
-                currentChar = i_String[i];
-                if ((currentChar < 'A' || currentChar > 'Z') && (currentChar < 'a' || currentChar > 'z') && !char.IsWhiteSpace(currentChar))
+                currentChar = i_InputStr[i];
+                if ((currentChar < 'A' || currentChar > 'Z') && (currentChar < 'a' || currentChar > 'z'))
                 {
-                    IsStringInEnglish = false;
+                    isInputInEnglish = false;
                 }
             }
 
-            return IsStringInEnglish;
+            return isInputInEnglish;
         }
 
         private static string getPalindromeAnalysis(string i_EnglishStringOrNumber)
         {
-            string palindromeAnalysis, isPalindromeStr;
-            StringBuilder strBuilderCopy= new StringBuilder(i_EnglishStringOrNumber);
+            string palindromeAnalysis, palindromState;
+            StringBuilder strBuilderCopy = new StringBuilder(i_EnglishStringOrNumber);
 
-            isPalindromeStr = isPalindrome(strBuilderCopy) ? "" : " not";
-            palindromeAnalysis = string.Format("The string is{0} a palindrome", isPalindromeStr);
+            palindromState = isPalindrome(strBuilderCopy) ? "" : " not";
+            palindromeAnalysis = string.Format("The string is{0} a palindrome", palindromState);
 
             return palindromeAnalysis;
         }
@@ -128,32 +127,32 @@ English analysis of the string: {2}.
             return result;
         }
 
-        private static string getDivisionBy4Analysis(string i_EnglishStringOrNumber)
+        private static string getDivisionBySpecificNumberAnalysis(string i_StrOrNumberValue)
         {
-            string divisionBy4Analysis, isDivisibleStr;
+            string divisionBySpecificNumberAnalysis, isDivisibleStr;
             int stringNumberValue;
 
-            if (isStringANumber(i_EnglishStringOrNumber))
+            if (isStringANumber(i_StrOrNumberValue))
             {
-                stringNumberValue = int.Parse(i_EnglishStringOrNumber);
-                isDivisibleStr = stringNumberValue % 4 == 0 ? "" : " not";
-                divisionBy4Analysis = string.Format("The string is a number and it is{0} divisible by 4", isDivisibleStr);
+                stringNumberValue = int.Parse(i_StrOrNumberValue);
+                isDivisibleStr = stringNumberValue % k_Diviser == 0 ? "" : " not";
+                divisionBySpecificNumberAnalysis = string.Format("The string is a number and it is{0} divisible by {1}", isDivisibleStr, k_Diviser);
             }
             else
             {
-                divisionBy4Analysis = "The string is not a number";
+                divisionBySpecificNumberAnalysis = "The string is not a number";
             }
 
-            return divisionBy4Analysis;
+            return divisionBySpecificNumberAnalysis;
         }
 
-        private static string getEnglishStrAnalysis(string i_EnglishStringOrNumber)
+        private static string getEnglishStrAnalysis(string i_StrOrNumberValue)
         {
             string englishAnalysis;
 
-            if (IsStringInEnglish(i_EnglishStringOrNumber))
+            if (isStringInEnglish(i_StrOrNumberValue))
             {
-                englishAnalysis = $"The string is english and it has {countLowerCaseLetters(i_EnglishStringOrNumber)} lower case letters";
+                englishAnalysis = $"The string is english and it has {countLowerCaseLetters(i_StrOrNumberValue)} lower case letters";
             }
             else
             {
@@ -165,17 +164,17 @@ English analysis of the string: {2}.
 
         private static int countLowerCaseLetters(string i_Str)
         {
-            int numOfLowerCaseLettersCounter = 0;
+            int numOfLowerCaseLetters = 0;
 
             foreach (char letter in i_Str)
             {
                 if (char.IsLower(letter))
                 {
-                    numOfLowerCaseLettersCounter++;
+                    numOfLowerCaseLetters++;
                 }
             }
-            return numOfLowerCaseLettersCounter;
-        }
 
+            return numOfLowerCaseLetters;
+        }
     }
 }
