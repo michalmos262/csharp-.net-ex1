@@ -1,11 +1,11 @@
 ﻿using System;
-using Ex01_04;
 
 namespace Ex01_05
 {
     class Program
     {
         private const uint k_InputStringLen = 8;
+        private const int k_Diviser = 3;
 
         public static void Main()
         {
@@ -23,22 +23,22 @@ namespace Ex01_05
         private static void printNumberStatistics(string i_PositiveNumberString)
         {
             string statistics;
-            int numOfDigitsSmallerThanOnesDigit, numOfDigitsDivisibleBy3, largestDigit;
+            int numOfDigitsSmallerThanOnesDigit, numOfDigitsDivisibleBySpecificDiviser, largestDigit;
             float averageDigitValue;
 
             numOfDigitsSmallerThanOnesDigit = getNumOfDigitsSmallerThanOnesDigit(i_PositiveNumberString);
-            numOfDigitsDivisibleBy3 = getNumOfDigitsDivisibleByX(i_PositiveNumberString, 3);
+            numOfDigitsDivisibleBySpecificDiviser = getNumOfDigitsDivisibleBySpecificDiviser(i_PositiveNumberString, k_Diviser);
             largestDigit = getLargestDigitInNumString(i_PositiveNumberString);
             averageDigitValue = getAverageDigitValueInNumString(i_PositiveNumberString);
-
             statistics = string.Format(
                 @"
 ----- Statistics of the number you typed -----
+
 The quantity of digits less than the ones digit is: {0}.
-The quantity of digits that are divisible by 3 is: {1}.
-The largest digit is: {2}.
-The average value of all the digits is: {3}.
-", numOfDigitsSmallerThanOnesDigit, numOfDigitsDivisibleBy3, largestDigit, averageDigitValue);
+The quantity of digits that are divisible by {1} is: {2}.
+The largest digit is: {3}.
+The average value of all the digits is: {4}.
+", numOfDigitsSmallerThanOnesDigit, k_Diviser, numOfDigitsDivisibleBySpecificDiviser, largestDigit, averageDigitValue);
             Console.WriteLine(statistics);
         }
 
@@ -50,7 +50,7 @@ The average value of all the digits is: {3}.
             inputString = Console.ReadLine();
             while (!isStringAPositiveNum(inputString))
             {
-                Console.Write("Invalid input ");
+                Console.Write("Invalid input.");
                 Console.WriteLine(welcomeMessage);
                 inputString = Console.ReadLine();
             }
@@ -58,14 +58,14 @@ The average value of all the digits is: {3}.
             return inputString;
         }
 
-        private static bool isStringAPositiveNum(string i_String)
+        private static bool isStringAPositiveNum(string i_InputStr)
         {
-            int stringNumberValue;
+            int numberValue;
             bool isStringANumber;
 
-            isStringANumber = int.TryParse(i_String, out stringNumberValue);
+            isStringANumber = int.TryParse(i_InputStr, out numberValue);
 
-            return isStringANumber && stringNumberValue > 0;
+            return isStringANumber && numberValue > 0;
         }
 
         private static int getNumOfDigitsSmallerThanOnesDigit(string i_PositiveNumberString)
@@ -85,20 +85,20 @@ The average value of all the digits is: {3}.
             return numOfDigitsSmallerThanOnesDigit;
         }
 
-        private static int getNumOfDigitsDivisibleByX(string i_PositiveNumberString, int i_X)
+        private static int getNumOfDigitsDivisibleBySpecificDiviser(string i_PositiveNumberString, int i_Diviser)
         {
-            int numOfDigitsDivisibleByX = 0, digitValue;
+            int numOfDigitsDivisibleByDiviser = 0, digitValue;
 
             foreach (char digit in i_PositiveNumberString)
             {
                 digitValue = (int)char.GetNumericValue(digit);
-                if (digitValue % i_X == 0)
+                if (digitValue % i_Diviser == 0)
                 {
-                    numOfDigitsDivisibleByX++;
+                    numOfDigitsDivisibleByDiviser++;
                 }
             }
 
-            return numOfDigitsDivisibleByX;
+            return numOfDigitsDivisibleByDiviser;
         }
 
         private static int getLargestDigitInNumString(string i_PositiveNumberString)
@@ -129,6 +129,5 @@ The average value of all the digits is: {3}.
             
             return (float)digitsSum / i_PositiveNumberString.Length;
         }
-
     }
 }
