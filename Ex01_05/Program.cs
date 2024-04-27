@@ -34,7 +34,7 @@ namespace Ex01_05
                 @"
 ----- Statistics of the number you typed -----
 
-The quantity of digits less than the ones digit is: {0}.
+The quantity of digits less than the unity digit is: {0}.
 The quantity of digits that are divisible by {1} is: {2}.
 The largest digit is: {3}.
 The average value of all the digits is: {4}.
@@ -44,7 +44,7 @@ The average value of all the digits is: {4}.
 
         private static string getStringOfPositiveNumber()
         {
-            string inputString, welcomeMessage = $"Please enter a positve integer with {k_InputStringLen} digits.";
+            string inputString, welcomeMessage = $"Please enter a positve number with {k_InputStringLen} digits:";
 
             Console.WriteLine(welcomeMessage);
             inputString = Console.ReadLine();

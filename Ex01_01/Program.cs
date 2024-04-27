@@ -18,7 +18,7 @@ namespace Ex01_01
             uint[] binarySeriesDecimalValues = getBinarySeriesDecimalValues(binaryStringsArray);
 
             Array.Sort(binarySeriesDecimalValues);
-            Console.Write("The numbers in ascending manner are:");
+            Console.Write("The numbers in ascending manner are: ");
             printArray(binarySeriesDecimalValues);
             printStatisticsOfNumbers(binarySeriesDecimalValues, binaryStringsArray);
         }
@@ -116,7 +116,7 @@ namespace Ex01_01
         {
             uint[] zerosInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
             uint[] onesInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
-            uint powerOfTwoNumbersCounter, ascendingSeriesNumberCounter = 0;
+            uint powerOfTwoNumbersCounter, ascendingSeriesNumberCounter;
             float averageNumOfZeros, averageNumOfOnes;
             string statistics;
 
@@ -129,10 +129,10 @@ namespace Ex01_01
                 @"
 ----- Statistics of the binary numbers you typed -----
 
-The average number of zeros in the binary number is {0}.
-The average number of ones in the binary number is {1}.
+The average number of zeros in the binary number is: {0}.
+The average number of ones in the binary number is: {1}.
 There are {2} numbers which are a power of 2.
-There are {3} numbers which their decimal digits are an ascending series
+There are {3} numbers which their decimal digits are an ascending series.
 The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNumOfOnes, powerOfTwoNumbersCounter, ascendingSeriesNumberCounter, i_Array[i_Array.Length - 1], i_Array[0]);
             Console.WriteLine(statistics);
         }
