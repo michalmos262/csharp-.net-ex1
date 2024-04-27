@@ -74,8 +74,9 @@ English analysis of the string: {2}.
 
         private static bool isStringANumber(string i_InputStr)
         {
-            int stringNumberValue;
-            return int.TryParse(i_InputStr, out stringNumberValue);
+            int numberValue;
+
+            return int.TryParse(i_InputStr, out numberValue);
         }
         private static bool isStringInEnglish(string i_InputStr)
         {
@@ -130,12 +131,12 @@ English analysis of the string: {2}.
         private static string getDivisionBySpecificNumberAnalysis(string i_StrOrNumberValue)
         {
             string divisionBySpecificNumberAnalysis, isDivisibleStr;
-            int stringNumberValue;
+            int numberValue;
 
             if (isStringANumber(i_StrOrNumberValue))
             {
-                stringNumberValue = int.Parse(i_StrOrNumberValue);
-                isDivisibleStr = stringNumberValue % k_Diviser == 0 ? "" : " not";
+                numberValue = int.Parse(i_StrOrNumberValue);
+                isDivisibleStr = numberValue % k_Diviser == 0 ? "" : " not";
                 divisionBySpecificNumberAnalysis = string.Format("The string is a number and it is{0} divisible by {1}", isDivisibleStr, k_Diviser);
             }
             else
