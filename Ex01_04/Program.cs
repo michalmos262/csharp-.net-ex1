@@ -83,7 +83,6 @@ English analysis of the string: {2}.
                 if (!char.IsDigit(currentChar))
                 {
                     isNumber = false;
-                    break;
                 }
             }
 
