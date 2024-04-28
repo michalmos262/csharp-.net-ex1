@@ -112,7 +112,7 @@ namespace Ex01_01
             Console.WriteLine();
         }
 
-        private static void printStatisticsOfNumbers(uint[] i_Array, string [] i_BinaryStringsArray)
+        private static void printStatisticsOfNumbers(uint[] i_DecimalStringsArray, string [] i_BinaryStringsArray)
         {
             uint[] zerosInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
             uint[] onesInBinaryStringCounters = new uint[i_BinaryStringsArray.Length];
@@ -124,7 +124,7 @@ namespace Ex01_01
             averageNumOfZeros = (float)sumArray(zerosInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
             averageNumOfOnes = (float)sumArray(onesInBinaryStringCounters) / (float)i_BinaryStringsArray.Length;
             powerOfTwoNumbersCounter = countPowerOfTwoNumbers(onesInBinaryStringCounters);
-            ascendingSeriesNumberCounter = countAscendingSeriesNumbers(i_Array);
+            ascendingSeriesNumberCounter = countAscendingSeriesNumbers(i_DecimalStringsArray);
             statistics = string.Format(
                 @"
 ----- Statistics of the binary numbers you typed -----
@@ -133,7 +133,7 @@ The average number of zeros in the binary number is: {0}.
 The average number of ones in the binary number is: {1}.
 There are {2} numbers which are a power of 2.
 There are {3} numbers which their decimal digits are an ascending series.
-The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNumOfOnes, powerOfTwoNumbersCounter, ascendingSeriesNumberCounter, i_Array[i_Array.Length - 1], i_Array[0]);
+The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNumOfOnes, powerOfTwoNumbersCounter, ascendingSeriesNumberCounter, i_DecimalStringsArray[i_DecimalStringsArray.Length - 1], i_DecimalStringsArray[0]);
             Console.WriteLine(statistics);
         }
 
