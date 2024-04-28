@@ -61,13 +61,11 @@ English analysis of the string: {2}.
 
         private static bool isInputNumberOrInEnglish(string i_UserInput)
         {
-            bool isUserInputNumber, isUserInputInEnglish, isUserInputOnlyLowerCase, isUserInputOnlyUpperCase, isUserInputValid;
+            bool isUserInputNumber, isUserInputInEnglish, isUserInputValid;
 
             isUserInputNumber = isStringANumber(i_UserInput);
             isUserInputInEnglish = isStringInEnglish(i_UserInput);
-            isUserInputOnlyLowerCase = i_UserInput == i_UserInput.ToLower();
-            isUserInputOnlyUpperCase = i_UserInput == i_UserInput.ToUpper();
-            isUserInputValid = isUserInputNumber || (isUserInputInEnglish && (isUserInputOnlyLowerCase || isUserInputOnlyUpperCase));
+            isUserInputValid = isUserInputNumber || (isUserInputInEnglish);
          
             return isUserInputValid;
         }
