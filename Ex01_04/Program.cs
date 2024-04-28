@@ -40,13 +40,13 @@ English analysis of the string: {2}.
 
         private static string getEnglishStringOrNumber()
         {
-            string userInputStr, welcomeMessage = $"Please enter a string with {k_InputStringLen} characters consisting solely of either English alphabet letters or digits.";
+            string userInputStr, welcomeMessage = $"Please enter a string with {k_InputStringLen} characters consisting solely of either English alphabet letters or digits:";
 
             Console.WriteLine(welcomeMessage);
             userInputStr = Console.ReadLine();
             while (!isUserInputInCorrectLenAndANumberOrInEnglish(userInputStr))
             {
-                Console.Write("Invalid input ");
+                Console.Write("Invalid input. ");
                 Console.WriteLine(welcomeMessage);
                 userInputStr = Console.ReadLine();
             }
@@ -74,9 +74,19 @@ English analysis of the string: {2}.
 
         private static bool isStringANumber(string i_InputStr)
         {
-            int numberValue;
+            bool isNumber = true;
+            char currentChar;
 
-            return int.TryParse(i_InputStr, out numberValue);
+            for (int i = 0; i < i_InputStr.Length && isNumber; i++)
+            {
+                currentChar = i_InputStr[i];
+                if (!char.IsDigit(currentChar))
+                {
+                    isNumber = false;
+                }
+            }
+
+            return isNumber;
         }
         private static bool isStringInEnglish(string i_InputStr)
         {
@@ -86,7 +96,7 @@ English analysis of the string: {2}.
             for (int i = 0; i < i_InputStr.Length && isInputInEnglish; i++)
             {
                 currentChar = i_InputStr[i];
-                if ((currentChar < 'A' || currentChar > 'Z') && (currentChar < 'a' || currentChar > 'z'))
+                if (!char.IsLetter(currentChar))
                 {
                     isInputInEnglish = false;
                 }
@@ -131,11 +141,11 @@ English analysis of the string: {2}.
         private static string getDivisionBySpecificNumberAnalysis(string i_StrOrNumberValue)
         {
             string divisionBySpecificNumberAnalysis, isDivisibleStr;
-            int numberValue;
+            long numberValue;
 
             if (isStringANumber(i_StrOrNumberValue))
             {
-                numberValue = int.Parse(i_StrOrNumberValue);
+                numberValue = long.Parse(i_StrOrNumberValue);
                 isDivisibleStr = numberValue % k_Diviser == 0 ? "" : " not";
                 divisionBySpecificNumberAnalysis = string.Format("The string is a number and it is{0} divisible by {1}", isDivisibleStr, k_Diviser);
             }
