@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Ex01_02
 {
@@ -14,7 +13,7 @@ namespace Ex01_02
 
         public static void DrawDiamond(int i_DiamondHeight)
         {
-            StringBuilder diamond = new StringBuilder();
+            System.Text.StringBuilder diamond = new System.Text.StringBuilder();
 
             if (i_DiamondHeight % 2 == 0)
             {
@@ -25,7 +24,7 @@ namespace Ex01_02
             Console.WriteLine(diamond.ToString());
         }
 
-        private static void buildDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStarsToAppendToDiamond = 1)
+        private static void buildDiamond(System.Text.StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStarsToAppendToDiamond = 1)
         {
             appendLineToDiamond(o_Diamond, i_DiamondHeight, i_NumOfStarsToAppendToDiamond);
             if (isCurrentRowBaseOfDiamond(i_DiamondHeight, i_NumOfStarsToAppendToDiamond))
@@ -42,7 +41,7 @@ namespace Ex01_02
             return i_NumOfStarsInCurrentRowOfDiamond == i_DiamondHeight;
         }
 
-        private static void appendLineToDiamond(StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStars)
+        private static void appendLineToDiamond(System.Text.StringBuilder o_Diamond, int i_DiamondHeight, int i_NumOfStars)
         {
             int numOfSpacesBeforeStars = (i_DiamondHeight - i_NumOfStars) / 2;
 
@@ -50,12 +49,12 @@ namespace Ex01_02
             appendStarsToRowInDiamond(o_Diamond, i_NumOfStars);
         }
 
-        private static void appendSpacesToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfSpaces)
+        private static void appendSpacesToRowInDiamond(System.Text.StringBuilder io_Diamond, int i_NumberOfSpaces)
         {
             io_Diamond.Append(new string(' ', i_NumberOfSpaces));
         }
 
-        private static void appendStarsToRowInDiamond(StringBuilder io_Diamond, int i_NumberOfStars)
+        private static void appendStarsToRowInDiamond(System.Text.StringBuilder io_Diamond, int i_NumberOfStars)
         {
             io_Diamond.Append(new string('*', i_NumberOfStars));
             io_Diamond.AppendLine();
