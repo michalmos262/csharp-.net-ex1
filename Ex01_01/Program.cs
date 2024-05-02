@@ -143,24 +143,24 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
 
             for (int i = 0; i < i_BinaryStringsArray.Length; i++)
             {
-                currentBinaryStringZerosCounter = currentBinaryStringOnesCounter = 0;
-                countZerosAndOnesInBinarySeries(i_BinaryStringsArray[i], ref currentBinaryStringZerosCounter, ref currentBinaryStringOnesCounter);
+                countZerosAndOnesInBinarySeries(i_BinaryStringsArray[i], out currentBinaryStringZerosCounter, out currentBinaryStringOnesCounter);
                 io_ZerosInBinaryStringCounters[i] = currentBinaryStringZerosCounter;
                 io_OnesInBinaryStringCounters[i] = currentBinaryStringOnesCounter;
             }
         }
 
-        private static void countZerosAndOnesInBinarySeries(string i_BinaryString, ref uint io_ZerosCounter, ref uint io_OnesCounter)
+        private static void countZerosAndOnesInBinarySeries(string i_BinaryString, out uint o_ZerosCounter, out uint o_OnesCounter)
         {
+            o_ZerosCounter = o_OnesCounter = 0;
             foreach (char digit in i_BinaryString)
             {
                 if (digit == '0')
                 {
-                    io_ZerosCounter++;
+                    o_ZerosCounter++;
                 }
                 else
                 {
-                    io_OnesCounter++;
+                    o_OnesCounter++;
                 }
             }
         }

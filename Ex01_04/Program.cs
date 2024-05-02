@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Ex01_04
 {
@@ -61,13 +60,12 @@ English analysis of the string: {2}.
 
         private static bool isInputNumberOrInEnglish(string i_UserInput)
         {
-            bool isUserInputNumber, isUserInputInEnglish, isUserInputValid;
+            bool isUserInputNumber, isUserInputInEnglish;
 
             isUserInputNumber = isStringANumber(i_UserInput);
             isUserInputInEnglish = isStringInEnglish(i_UserInput);
-            isUserInputValid = isUserInputNumber || (isUserInputInEnglish);
-         
-            return isUserInputValid;
+            
+            return isUserInputNumber || isUserInputInEnglish;
         }
 
         private static bool isStringANumber(string i_InputStr)
@@ -106,7 +104,7 @@ English analysis of the string: {2}.
         private static string getPalindromeAnalysis(string i_EnglishStringOrNumber)
         {
             string palindromeAnalysis, palindromState;
-            StringBuilder strBuilderCopy = new StringBuilder(i_EnglishStringOrNumber);
+            System.Text.StringBuilder strBuilderCopy = new System.Text.StringBuilder(i_EnglishStringOrNumber);
 
             palindromState = isPalindrome(strBuilderCopy) ? "" : " not";
             palindromeAnalysis = string.Format("The string is{0} a palindrome", palindromState);
@@ -114,7 +112,7 @@ English analysis of the string: {2}.
             return palindromeAnalysis;
         }
 
-        private static bool isPalindrome(StringBuilder i_StrBuilder)
+        private static bool isPalindrome(System.Text.StringBuilder i_StrBuilder)
         {
             bool result;
 
