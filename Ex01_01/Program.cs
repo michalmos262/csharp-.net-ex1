@@ -52,11 +52,12 @@ namespace Ex01_01
         {
             bool isBinaryNum = true, isPositiveNum = false;
 
-            for (int i = 0; i < i_UserInput.Length && isBinaryNum; i++)
+            for (int i = 0; i < i_UserInput.Length; i++)
             {
                 if (i_UserInput[i] != '0' && i_UserInput[i] != '1')
                 {
                     isBinaryNum = false;
+                    break;
                 }
                 else if(i_UserInput[i] == '1')
                 {
@@ -213,11 +214,12 @@ The largest number is {4} and the smallest is {5}", averageNumOfZeros, averageNu
             string numberString = i_Number.ToString();
             bool isDigitsAnAscendingSeries = true;
 
-            for (int i = 1; i < numberString.Length && isDigitsAnAscendingSeries; i++)
+            for (int i = 1; i < numberString.Length; i++)
             {
                 if (numberString[i] <= numberString[i - 1])
                 {
                     isDigitsAnAscendingSeries = false;
+                    break;
                 }
             }
 

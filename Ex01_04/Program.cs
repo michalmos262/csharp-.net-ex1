@@ -73,12 +73,13 @@ English analysis of the string: {2}.
             bool isNumber = true;
             char currentChar;
 
-            for (int i = 0; i < i_InputStr.Length && isNumber; i++)
+            for (int i = 0; i < i_InputStr.Length; i++)
             {
                 currentChar = i_InputStr[i];
                 if (!char.IsDigit(currentChar))
                 {
                     isNumber = false;
+                    break;
                 }
             }
 
@@ -89,12 +90,13 @@ English analysis of the string: {2}.
             bool isInputInEnglish = true;
             char currentChar;
 
-            for (int i = 0; i < i_InputStr.Length && isInputInEnglish; i++)
+            for (int i = 0; i < i_InputStr.Length; i++)
             {
                 currentChar = i_InputStr[i];
                 if (!char.IsLetter(currentChar))
                 {
                     isInputInEnglish = false;
+                    break;
                 }
             }
 
